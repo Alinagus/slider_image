@@ -3,64 +3,122 @@ const images = [
     text: 'Rostov-on-Don LCD admiral',
     time: '3.5 months',
     area: '81 m2',
-    url: 'https://img.freepik.com/free-photo/a-painting-of-a-mountain-lake-with-a-mountain-in-the-background_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.967060102.1710720000&semt=ais'
+    url: "img/image-1.svg"
 },
 {
     text: 'Sochi Thieves',
     time: '4 months',
     area: '105 m2',
-    url: 'https://avatars.mds.yandex.net/i?id=bb6f43ed6751b908e678f9081d830a85_l-4821174-images-thumbs&n=27&h=480&w=480'
+    url: 'img/image-2.png'
 },
 {
     text: 'Rostov-on-Don Patriotic',
     time: '3 months',
     area: '93 m2',
-    url: 'https://avatars.mds.yandex.net/i?id=1090e8456477d0a8a1786e57311c13a3_l-5207778-images-thumbs&n=27&h=480&w=480'
+    url: 'img/image-3.png'
 }
 ]
 
-
-function initSlider() {
+function initSlider(options) {
   if (!images || !images.length) return;
-  
-
+    
   
   let sliderImages = document.querySelector(".box__image_slider");
-  let sliderArrows = document.querySelector(".slider_arrow");
+  let sliderArrows = document.querySelectorAll(".slider_arrow");
+  let sliderDots = document.querySelector('.slider_dots')
+  const text = document.querySelector(".city");
+  const time = document.querySelector(".time");
+  const area = document.querySelector(".area")
+
   
   initImages();
   initArrows();
+
+  if (options.dots) {
+    initDots();
+  }
+  if (options.titles) {
+    initTitles();
+  }
   
   
   
-  function initImages() {
+function initImages() {
     images.forEach((image, index) => {
-      let imageDiv = `<div class="image n${index} ${index === 0? "active" : ""}" style="background-image:url(${images[index].url});" data-index="${index}"></div>`;
+      let imageDiv = `<div class="image n${index} ${index === 0? "active" : ""}" style="background-image: url(${images[index].url});" data-index="${index}"></div>`;
       sliderImages.innerHTML += imageDiv;
     });
   }
   
-  function initArrows() {
-    sliderArrows.querySelectorAll(".slider_arrow").forEach(arrow => {
+function initArrows() {
+    sliderArrows.forEach(arrow => {
       arrow.addEventListener("click", function() {
         let curNumber = +sliderImages.querySelector(".active").dataset.index;
         let nextNumber;
-        if (arrow.classList.contains("left")) {
+        if (arrow.classList.contains("prev")) {
           nextNumber = curNumber === 0? images.length - 1 : curNumber - 1;
-        } else {
+        } 
+        else {
           nextNumber = curNumber === images.length - 1? 0 : curNumber + 1;
         }
+        NextText(nextNumber);
+        slideText(nextNumber);
         moveSlider(nextNumber);
       });
     });
   }
+
   
+
+  function initDots() {
+    images.forEach((image, index) => {
+      let dot = `<div class="slider__dots-item n${index} ${index === 0? "active" : ""}" data-index="${index}"></div>`
+    sliderDots.innerHTML += dot;
+  });
+  sliderDots.querySelectorAll(".slider__dots-item").forEach(dot => {
+    dot.addEventListener("click", function() {
+
+      ind = this.dataset.index;
+      NextText(ind)
+      slideText(ind)
+      moveSlider(ind)
+    })
+  })
+}
+
+function slideText(index){
+      sliderDots.querySelector(".active")
+      changeText = document.querySelector(`.num${index}`);
+      changeText.className += ' active';
+
+  }
+
+function NextText(num){
+  text.innerText = images[num].text;
+  time.innerText = images[num].time;
+  area.innerText = images[num].area;
+}
+
   function moveSlider(num) {
     sliderImages.querySelector(".active").classList.remove("active");
     sliderImages.querySelector(".n" + num).classList.add("active");
-  } 
- 
+
+
+    if (options.dots) {
+      sliderDots.querySelector(".active").classList.remove("active");
+      sliderDots.querySelector(".n" + num).classList.add("active");
+
+    }
+  }
 }
-document.addEventListener("DOMContentLoaded", initSlider);
+
+let sliderOptions = {
+  dots: true,
+
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+  initSlider(sliderOptions);
+});
 
 
