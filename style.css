@@ -34,7 +34,7 @@ hr{
     border: rgb(203 162 96) solid 1px;
 }
 .box__description p{
-    color: aliceblue;
+    color: white;
     font-family: Nunito Sans;    
     font-size: 13px;
     font-weight: 300;
@@ -52,12 +52,13 @@ h1{
 .box__description_prmetrs{
     gap: 65px;
 }
-.box__description_prmetrs_1{
+.prmetrs_1{
     margin-bottom: 65px;
 }
-.box__description_prmetrs_1 div{
+.prmetrs_1 div{
+    display: flex;
     flex-direction: column;
-    gap: 44px;
+    gap: 10px;
 }
 .area,
 .city{
@@ -66,49 +67,37 @@ h1{
 .box__description_slider{
     gap: 18px;
     margin-top: 83px;
+    height: 15px;
 }
 .next, .prev{
     position: relative;
-    top: 5px;
-    width: 41px;
-    height: 1px;
-    background-color: white;
-    left: 3px;
-    display: block;
-}
-.next::after, .next::before,  .prev::after, .prev::before{
-    content: '';
-    position: absolute;
-    width: 10px;
-    height: 1px;
-    background-color: white;
- 
-}
-.next::before {
-    top: 3px;
-    right: -2px;
-    transform: rotate(-45deg);
-}
-.next::after{
-    top: -3px;
-    right: -2px;
-    transform: rotate(45deg);
-}
-.prev::after{
-    top: 3px;
-    right: 33px;
-    transform: rotate(-135deg);
-}
-.prev::before{
-    top: -3px;
-    right: 33px;
-    transform: rotate(135deg);
-}
-.next:hover, .prev:hover{
-    cursor: pointer;
 }
 
-.box__image{
+.next:hover, .prev:hover{ 
+    cursor: pointer;
+    width: 47px;
+}
+
+.slider_dots{
+    margin-top: 2px;
+    gap: inherit;
+  }
+
+  
+.slider__dots-item {
+    width: 10px;
+    height: 10px;
+    background: grey;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+.slider__dots-item:hover, .slider__dots-item.active {
+    background-color: white;
+  }
+
+  .box__image{
     position: relative;
 }
 .box__image_name{
@@ -119,13 +108,21 @@ h1{
     text-transform: uppercase;
     margin-bottom: 53px;
 }
+.name_city:hover, .name_city.active{
+    color: rgb(227, 184, 115);
+    text-decoration: underline;
+    text-underline-position: under;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+}
+
 .box__image_slider{
     width: 679px;
     height: 482px;
     position: relative;
   }
 
-  .box__image_slider .image{
+.box__image_slider .image{
     background-size: cover;
     background-position: center center;
     width: 100%;
@@ -135,20 +132,11 @@ h1{
     top: 0;
     opacity: 0;
   }
+
   .box__image_slider .image.active {
     opacity: 1;
   }
 
-.slider_dots{
-    width: 10px;
-    height: 10px;
-    border-radius: 10px;
-    border:  solid 0px;
-    background-color: grey;
-  }
-  .slider_dots:hover{
-    background-color: white;
-  }
 
 
 
