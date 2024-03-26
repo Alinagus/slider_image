@@ -108,7 +108,7 @@ h1{
     text-transform: uppercase;
     margin-bottom: 53px;
 }
-.name_city:hover, .name_city.active{
+.name_city:hover, .name_city.active1{
     color: rgb(227, 184, 115);
     text-decoration: underline;
     text-underline-position: under;
@@ -136,7 +136,3 @@ h1{
   .box__image_slider .image.active {
     opacity: 1;
   }
-
-
-
-
